@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESMO Studios - Transformamos Ideas en Marcas que Inspiran</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES Y ESTILOS GLOBALES --- */
+        :root {
+            --color-negro: #0D0D0D;
+            --color-rojo: #E50914;
+            --color-blanco: #F5F5F5;
+            --color-gris: #AAAAAA;
+            --color-gris-oscuro: #141414;
+            --font-principal: 'Exo 2', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            font-family: var(--font-principal);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 0;
+        }
+        
+        h1, h2, h3 {
+            font-weight: 700;
+            color: var(--color-blanco);
+            text-transform: uppercase;
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--color-rojo);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- HEADER Y NAVEGACIÓN --- */
+        .header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(13, 13, 13, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--color-blanco);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: var(--color-rojo);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: var(--color-blanco);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--color-rojo);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-rojo);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--color-blanco);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* --- SECCIÓN HERO --- */
+        #inicio {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2073&auto=format&fit=crop'); /* Imagen de fondo profesional */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto Parallax */
+        }
+        
+        .hero-content {
+            z-index: 3;
+            animation: fadeIn 2s ease-in-out;
+            padding: 0 20px;
+        }
+        
+        .hero-bat-logo svg {
+            width: 100px;
+            height: auto;
+            fill: var(--color-rojo);
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px var(--color-rojo));
+        }
+
+        .hero-tagline {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        .cta-button {
+            background: var(--color-rojo);
+            color: var(--color-blanco);
+            padding: 18px 40px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border: 2px solid var(--color-rojo);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SECCIÓN SOBRE NOSOTROS --- */
+        #sobre-nosotros {
+            background: var(--color-gris-oscuro);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-text {
+            flex: 1;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--color-gris);
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--color-blanco);
+        }
+        
+        .about-text p span {
+            color: var(--color-rojo);
+            font-weight: 700;
+        }
+        
+        .about-image {
+            flex: 0 0 45%;
+            max-width: 480px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            filter: saturate(0) brightness(0.8);
+            transition: all 0.4s ease;
+        }
+        
+        .about-image img:hover {
+            filter: saturate(1) brightness(1);
+        }
+
+        /* --- SECCIÓN PORTFOLIO --- */
+        #portfolio {
+            background-color: var(--color-negro);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            background: var(--color-gris-oscuro);
+            aspect-ratio: 16 / 9;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(229, 9, 20, 0.9), transparent);
+            color: var(--color-blanco);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            padding: 25px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .portfolio-overlay p {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* --- SECCIÓN SERVICIOS --- */
+        #servicios {
+            background: var(--color-gris-oscuro);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .service-card {
+            background: var(--color-negro);
+            padding: 45px 35px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-rojo);
+        }
+        
+        .service-card .icon {
+            font-size: 3.5rem;
+            color: var(--color-rojo);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .icon {
+            transform: scale(1.1);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: var(--color-gris);
+            line-height: 1.7;
+        }
+
+        /* --- SECCIÓN CONTACTO --- */
+        #contacto {
+            background: var(--color-negro);
+        }
+
+        .contact-form {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 18px;
+            background: var(--color-gris-oscuro);
+            border: 2px solid #222;
+            border-radius: 5px;
+            color: var(--color-blanco);
+            font-family: var(--font-principal);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-rojo);
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            background: var(--color-rojo);
+            border: 2px solid var(--color-rojo);
+            color: var(--color-blanco);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background: transparent;
+        }
+        
+        .social-icons {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .social-icons a {
+            color: var(--color-gris);
+            font-size: 2.2rem;
+            margin: 0 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--color-rojo);
+            transform: translateY(-5px);
+        }
+        
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--color-negro);
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+            color: var(--color-gris);
+            border-top: 1px solid #222;
+        }
+        .footer span {
+            color: var(--color-rojo);
+            font-weight: 700;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 65px; /* Altura del header */
+                width: 100%;
+                height: calc(100vh - 65px);
+                background: var(--color-negro);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: left 0.5s ease;
+            }
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+            
+            h2 { font-size: 2.2rem; }
+            .hero-tagline { font-size: 1.8rem; }
+            
+            .about-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .about-image { max-width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#inicio" class="logo">ESMO<span> STUDIOS</span></a>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-nosotros">Nosotros</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+
+    <section id="inicio">
+        <div class="hero-content">
+            <div class="hero-bat-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2.5c-4.06 0-7.53 2.39-9.16 5.75-.24.5.05.95.59.95h17.14c.54 0 .83-.45.59-.95C19.53 4.89 16.06 2.5 12 2.5zM3.5 10c-.28 0-.5.22-.5.5v.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5v-.5c0-.28-.22-.5-.5-.5h-6zm17 0h-6c-.28 0-.5.22-.5.5v.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5v-.5c0-.28-.22-.5-.5-.5zM8 15.5c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zm8 0c-1.1 0-2 .9-2 2v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zm-4 1c-1.38 0-2.5 1.12-2.5 2.5S10.62 21.5 12 21.5s2.5-1.12 2.5-2.5S13.38 16.5 12 16.5z"/></svg>
+            </div>
+            <h1 class="hero-tagline">Transformamos ideas en marcas y videos que inspiran</h1>
+            <a href="#portfolio" class="cta-button">Ver Portfolio</a>
+        </div>
+    </section>
+
+    <section id="sobre-nosotros">
+        <div class="container">
+            <h2>Nuestra Misión</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Elevamos tu Visión al Siguiente Nivel</h3>
+                    <p>
+                        En ESMO Studios, creemos que cada creador, profesional o emprendedor tiene una historia única que merece ser contada con impacto. Nuestra misión es ser el catalizador que transforma tus ideas en una <span>marca personal poderosa</span> y en <span>videos de alta calidad</span> que conecten con tu audiencia.
+                        <br><br>
+                        Combinamos estrategia de branding con producción audiovisual de vanguardia para construir y mejorar tu presencia digital. No solo creamos contenido, construimos legados.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Equipo creativo discutiendo una estrategia de marca">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2>Proyectos Recientes</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="images/BETIN.JPG" alt="Proyecto de Branding para influencer">
+                    <div class="portfolio-overlay">
+                        <h3>Marca Personal - Alvaro "Betin"</h3>
+                        <p>Branding y Diseño Visual</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/JORDAN.JPG" alt="Producción de video para producto">
+                    <div class="portfolio-overlay">
+                        <h3>Publicaciones de crecimiento personal - "Mindset"</h3>
+                        <p>Producción y Edición de imagenes</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="images/POLITICA.JPG" alt="Edición de video para redes sociales">
+                    <div class="portfolio-overlay">
+                        <h3>Reels Politicos - "Carlos acuña"</h3>
+                        <p>Edición y Postproducción</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-user-astronaut"></i></div>
+                    <h3>Marcas Personales</h3>
+                    <p>Construimos y potenciamos tu identidad desde cero para que destaques, conectes y consolides tu autoridad en tu nicho.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-film"></i></div>
+                    <h3>Producción de Video</h3>
+                    <p>Gestionamos la creación de contenido audiovisual, desde la idea hasta el corte final, con calidad cinematográfica para tus plataformas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Diseño de Branding</h3>
+                    <p>Creamos el universo visual de tu marca: logotipos, paletas de colores y guías de estilo que garantizan coherencia y profesionalismo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div class="container">
+            <h2>Hablemos de tu Proyecto</h2>
+            <form action="https://formsubmit.co/zzzesmo@gmail.com" method="POST" class="contact-form">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Tu Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" placeholder="Tu Correo Electrónico" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="7" placeholder="Cuéntanos tu idea..." required></textarea>
+                </div>
+                <input type="hidden" name="_captcha" value="false">
+                <button type="submit" class="submit-button">Enviar Mensaje</button>
+            </form>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/esmostudios" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+               <a href="mailto:zzzesmo@gmail.com" aria-label="Email"> <i class="fas fa-envelope"></i>
+                <a href="https://wa.me/573233344110" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 <span>ESMO STUDIOS</span>. Transformando Ideas en Realidad.</p>
+    </footer>
+
+    <script>
+    // --- Menú Hamburguesa para Móvil ---
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-menu a').forEach(n => n.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }));
+    </script>
+
+</body>
+</html>
